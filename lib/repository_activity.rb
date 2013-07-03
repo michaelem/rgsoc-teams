@@ -23,7 +23,7 @@ class RepositoryActivity
   private
     attr_reader :client, :source
     def repo
-      source_url_path.to_s.sub(/^\//,"")
+      source_url_path.sub(/^\//,"")
     end
     def source_url_path
       URI(source.url).path
