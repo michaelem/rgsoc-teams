@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130627162940) do
+ActiveRecord::Schema.define(:version => 20130704142032) do
 
   create_table "activities", :force => true do |t|
     t.integer  "team_id"
@@ -49,11 +49,12 @@ ActiveRecord::Schema.define(:version => 20130627162940) do
   create_table "sources", :force => true do |t|
     t.string   "url"
     t.integer  "team_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "kind"
     t.string   "feed_url"
     t.string   "title"
+    t.string   "last_synced_event"
   end
 
   create_table "submissions", :force => true do |t|
