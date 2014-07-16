@@ -11,3 +11,11 @@ h1 Editing team
 
 == render 'form'
 
+/ h3 Conferences
+/ fieldset.conferences
+/   .header
+/     label Conference
+/   = f.simple_fields_for :attendances do |s|
+/     = s.input :conference_id, as: :select, collection: conferences, required: false, label: false
+/     = s.link_to_remove 'Remove'
+/   = f.link_to_add 'Add another conference', :attendances

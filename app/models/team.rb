@@ -20,9 +20,13 @@ class Team < ActiveRecord::Base
   has_many :activities, dependent: :destroy
   has_one :last_activity, -> { order('id DESC') }, class_name: 'Activity'
   has_many :comments
+  has_many :attendances
+  has_many :conferences, through: :attendances
+
   belongs_to :event
 
   accepts_nested_attributes_for :roles, :sources, allow_destroy: true
+  accepts_nested_attributes_for :attendances, allow_destroy: true
 
   before_create :set_number
   before_save :set_last_checked, if: :checked

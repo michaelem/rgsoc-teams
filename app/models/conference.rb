@@ -1,6 +1,7 @@
 class Conference < ActiveRecord::Base
   has_many :attendances
-  has_many :attendees, through: :attendances, source: :user
+  has_many :confirmed_attendees, -> { where(confirmed: true) }, through: :attendances, source: :team
+  has_many :attendees, through: :attendances, source: :team
 
   accepts_nested_attributes_for :attendances
 

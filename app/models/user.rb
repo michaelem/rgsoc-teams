@@ -47,13 +47,10 @@ class User < ActiveRecord::Base
   end
   has_many :applications
   has_many :teams, -> { uniq }, through: :roles
-  has_many :attendances
-  has_many :conferences, through: :attendances
 
   validates :github_handle, presence: true, uniqueness: true
   validates :homepage, format: { with: URL_PREFIX_PATTERN }, allow_blank: true
 
-  accepts_nested_attributes_for :attendances, allow_destroy: true
   accepts_nested_attributes_for :roles
 
   before_save :sanitize_location
@@ -87,9 +84,7 @@ class User < ActiveRecord::Base
     end
 
     def with_all_associations_joined
-      includes(:conferences).group("conferences.id").
-      includes(:roles).group("roles.id").
-      includes(roles: :team).group("teams.id")
+      includes(:roles).group('roles.id').includes(roles: :team).group('teams.id')
     end
 
     def with_interest(interest)
